@@ -42,3 +42,12 @@ android {
 flutter {
     source = "../.."
 }
+
+allprojects {
+    repositories {
+        ...
+        flatDir{
+            dirs "$rootDir/libs"
+        }
+    }
+}
