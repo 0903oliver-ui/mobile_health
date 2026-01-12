@@ -45,9 +45,9 @@ flutter {
 
 allprojects {
     repositories {
-        ...
-        flatDir{
-            dirs "$rootDir/libs"
+        // ...
+        flatDir {
+            dirs("${rootDir}/libs")
         }
     }
 }
