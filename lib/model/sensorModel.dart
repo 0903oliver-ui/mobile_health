@@ -1,5 +1,3 @@
-
-
 enum SensorType{acclrmtr, hrsnsr, lsnsr}
 
 abstract interface class Sensor{
