@@ -5,6 +5,8 @@ import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 part 'view/first_screen_view.dart';
+part 'view/register_screen.dart';
+part 'view/homePage.dart';
 
 void main() {
   runApp(const MyApp());
