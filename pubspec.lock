@@ -160,6 +160,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.17.0"
+  movesense_plus:
+    dependency: "direct main"
+    description:
+      name: movesense_plus
+      sha256: "8a1ffa411f43e5fe518456d6e744c6fa38967bce81855951d8eec0b5cdbff515"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.1.0"
   nested:
     dependency: transitive
     description:
