@@ -65,7 +65,8 @@ class _DeviceInteractionWidgetState extends State<DeviceInteractionWidget> {
                   _accelerometerItem(model),
                   _hrItem(model),
                   _ledItem(model),
-                  _temperatureItem(model)
+                  _temperatureItem(model),
+                  _lightItem(model), // <-- reference it to fix the warning
                 ],
               ));
         },
@@ -121,6 +122,40 @@ class _DeviceInteractionWidgetState extends State<DeviceInteractionWidget> {
         trailing: ElevatedButton(
           child: Text("Get"),
           onPressed: () => deviceModel.getTemperature(),
+        ),
+      ),
+    );
+  }
+
+  Widget _lightItem(DeviceModel deviceModel) {
+    return Card(
+      child: ListTile(
+        title: Text("Light Sensor"),
+        subtitle: StreamBuilder<String>(
+          stream: deviceModel.lightSensor.lx,
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return Text("Loading...");
+            } else if (snapshot.hasError) {
+              return Text("Error: ${snapshot.error}");
+            } else if (snapshot.hasData) {
+              return Text(snapshot.data!);
+            } else {
+              return Text("No data available");
+            }
+          },
+        ),
+        trailing: ElevatedButton(
+          child: Text(deviceModel.lightSensor.isRunning ? "Stop" : "Start"),
+          onPressed: () {
+            setState(() {
+              if (deviceModel.lightSensor.isRunning) {
+                deviceModel.lightSensor.stop();
+              } else {
+                deviceModel.lightSensor.start();
+              }
+            });
+          },
         ),
       ),
     );

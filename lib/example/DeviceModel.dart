@@ -4,12 +4,16 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:mdsflutter/Mds.dart';
 
+import '../model/sensorModel.dart';
+
 class DeviceModel extends ChangeNotifier {
   String? _serial;
   String? _name;
 
   String? get name => _name;
   String? get serial => _serial;
+
+  final LightSensor lightSensor = LightSensor();
 
   StreamSubscription? _accSubscription;
   String _accelerometerData = "";
