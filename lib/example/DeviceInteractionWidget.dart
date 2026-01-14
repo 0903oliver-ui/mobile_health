@@ -132,7 +132,7 @@ class _DeviceInteractionWidgetState extends State<DeviceInteractionWidget> {
       child: ListTile(
         title: Text("Light Sensor"),
         subtitle: StreamBuilder<String>(
-          stream: deviceModel.lightSensor.lx,
+          stream: deviceModel.lightSensor.readings,
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return Text("Loading...");
