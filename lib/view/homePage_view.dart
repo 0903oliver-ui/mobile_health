@@ -117,9 +117,10 @@ class _HomePageState extends State<HomePage> {
             right: 40,
             child: GestureDetector(
               onTap: () {
+                final ConnectModel = ConnectionsscreenViewModel();
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => ConnectionsScreen()),
+                  MaterialPageRoute(builder: (context) => ConnectionsScreen(model: ConnectModel,),),
                 );
               },
               child: Container(
@@ -134,7 +135,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
                 child: const Text(
-                  'Connect',
+                  'Connect to sensor',
                   style: TextStyle(fontSize: 24, color: Colors.black),
                 ),
               ),

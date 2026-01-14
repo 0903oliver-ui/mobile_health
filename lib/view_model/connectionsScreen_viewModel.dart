@@ -1,5 +1,10 @@
 part of '../main.dart';
 
-// class HomepageViewModel extends ChangeNotifier {
+class ConnectionsscreenViewModel extends ChangeNotifier {
+  String adress = '';
 
-// }
+  void setAdress(String macA){
+    adress = macA;
+    notifyListeners();
+  }
+}
