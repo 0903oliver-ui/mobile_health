@@ -4,9 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-part 'view/first_screen_view.dart';
-part 'view/register_screen.dart';
-part 'view/homePage.dart';
+part 'view/firstScreen_view.dart';
+part 'view/registerScreen_view.dart';
+part 'view/homePage_view.dart';
+part 'view_model/firstScreen_viewModel.dart';
+part 'view_model/homepage_viewModel.dart';
+part 'view_model/registerScreen_viewModel.dart';
 
 void main() {
   runApp(const MyApp());
