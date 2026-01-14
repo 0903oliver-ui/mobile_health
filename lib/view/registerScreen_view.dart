@@ -102,9 +102,13 @@ class RegisterScreen extends StatelessWidget {
                   ),
                   GestureDetector(
                     onTap: () {
+                      final homeModel = HomepageViewModel();
+
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => HomePage()),
+                        MaterialPageRoute(
+                          builder: (context) => HomePage(model: homeModel,),
+                        ),
                       );
                     },
                     child: Image.asset(

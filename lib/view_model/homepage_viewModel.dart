@@ -5,6 +5,16 @@ class HomepageViewModel extends ChangeNotifier {
 
   int? get latestSleepScore => _latestSleepScore;
 
+  /// Convenience getters for the View (keeps UI logic out of the View).
+  String get sleepScoreTitle =>
+      _latestSleepScore == null ? 'No previous sessions' : 'Latest sleep score';
+
+  String get sleepScoreValueText =>
+      _latestSleepScore == null ? '__' : _latestSleepScore.toString();
+
+  /// Alias used by the View when the user requests a refresh.
+  Future<void> refresh() => loadLatestSleepScore();
+
   Future<void> loadLatestSleepScore() async {
     // Fremtidig kode (når databasen kendes)
     // final session = await _DB.getLatestSleepSession();
