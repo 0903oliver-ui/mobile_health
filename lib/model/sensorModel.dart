@@ -1,10 +1,7 @@
 import 'package:light/light.dart';
 import 'dart:async';
 
-import 'dart:convert';
 
-import 'package:flutter/foundation.dart';
-import 'package:mdsflutter/Mds.dart';
 
 enum SensorType{acclrmtr, hrsnsr, lxsnsr}
 
