@@ -36,6 +36,8 @@ class ConnectionsScreen extends StatelessWidget {
             right: 30,
             child: GestureDetector(
               onTap: () {
+                
+
 
                 Navigator.push(
                   context,
@@ -58,6 +60,17 @@ class ConnectionsScreen extends StatelessWidget {
                   style: TextStyle(fontSize: 20, color: Colors.black),
                 ),
               ),
+            ),
+          ),
+
+          Positioned(
+            top: 150,
+            left: 280,
+            right: 0,
+            child: Image.asset(
+              'assets/images/NotConnected.png',
+              height: 50,
+              fit: BoxFit.contain,
             ),
           ),
 

@@ -1,8 +1,8 @@
 part of '../main.dart';
 
-class LoadingscreenView extends StatelessWidget{
+class LoadingscreenView extends StatelessWidget {
   const LoadingscreenView({super.key});
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -13,11 +13,20 @@ class LoadingscreenView extends StatelessWidget{
           Positioned(
             top: 500,
             right: 40,
-            left:40,
-            child: Image.asset('assets/images/loadingGif.gif')
+            left: 40,
+            child: Image.asset('assets/images/loadingGif.gif'),
           ),
 
-          
+          Positioned(
+            top: 150,
+            left: 280,
+            right: 0,
+            child: Image.asset(
+              'assets/images/NotConnected.png',
+              height: 50,
+              fit: BoxFit.contain,
+            ),
+          ),
 
           Positioned(
             top: -50,
@@ -38,10 +47,7 @@ class LoadingscreenView extends StatelessWidget{
             child: Center(
               child: Text(
                 'LukØje',
-                style: TextStyle(
-                  fontSize: 24,
-                  color: Colors.black,
-                ),
+                style: TextStyle(fontSize: 24, color: Colors.black),
               ),
             ),
           ),
@@ -49,7 +55,7 @@ class LoadingscreenView extends StatelessWidget{
             top: 150,
             left: 120,
             right: 120,
-            child: Image.asset('assets/images/Logo.png')
+            child: Image.asset('assets/images/Logo.png'),
           ),
         ],
       ),

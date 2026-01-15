@@ -96,7 +96,7 @@ class RegisterScreen extends StatelessWidget {
                       color: Colors.black,
                     ),
                     child: const CircleAvatar(
-                      radius: 35,
+                      radius: 25,
                       backgroundColor: Color.fromRGBO(113, 198, 255, 1),
                     ),
                   ),
@@ -112,8 +112,8 @@ class RegisterScreen extends StatelessWidget {
                     },
                     child: Image.asset(
                       'assets/images/arrow.png',
-                      width: 50,
-                      height: 50,
+                      width: 20,
+                      height: 20,
                     ),
                   ),
                 ],
