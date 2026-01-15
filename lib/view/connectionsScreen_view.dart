@@ -36,7 +36,11 @@ class ConnectionsScreen extends StatelessWidget {
             right: 30,
             child: GestureDetector(
               onTap: () {
-                
+
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => LoadingscreenView()),
+                );
               },
               child: Container(
                 height: 80,
@@ -49,10 +53,10 @@ class ConnectionsScreen extends StatelessWidget {
                     width: 1,
                   ),
                 ),
-              child: const Text(
-                'Connect',
-                style: TextStyle(fontSize: 20, color: Colors.black)
-              )
+                child: const Text(
+                  'Connect',
+                  style: TextStyle(fontSize: 20, color: Colors.black),
+                ),
               ),
             ),
           ),

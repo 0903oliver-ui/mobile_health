@@ -13,6 +13,7 @@ part 'view_model/homepage_viewModel.dart';
 part 'view_model/registerScreen_viewModel.dart';
 part 'view/connectionsScreen_view.dart';
 part 'view_model/connectionsScreen_viewModel.dart';
+part 'view/loadingScreen_view.dart';
 
 void main() {
   runApp(const MyApp());
