@@ -1,4 +1,11 @@
-part of '../main.dart';
+import 'dart:async';
+
+import 'package:flutter/material.dart';
+
+import 'package:movesense_plus/movesense_plus.dart';
+
+import 'sensorModel.dart';
+import 'deviceModel.dart';
 
 //'0C:8C:DC:1B:23:16'
 class StreamModel{
