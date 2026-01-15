@@ -16,6 +16,12 @@ class _LoadingScreenViewState extends State<LoadingscreenView> {
   void initState() {
     super.initState();
 
+    if (widget.model.device == null) {
+      debugPrint("Device is null. Cannot subscribe to statusEvents.");
+      // Handle the null case (e.g., show an error or navigate back)
+      return;
+    }
+
     // Listen to the statusEvents stream
     _statusSubscription = widget.model.device!.statusEvents.listen((status) {
       if (status == DeviceConnectionStatus.connected) {
