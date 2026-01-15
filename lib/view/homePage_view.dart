@@ -19,7 +19,7 @@ class _HomePageState extends State<HomePage> {
 
     // Midlertidig test (fjern når DB virker):
     // widget.model.setLatestSleepScore(null);
-    // widget.model.setLatestSleepScore(82);
+    //widget.model.setLatestSleepScore(82);
   }
 
   Future<void> requestPermissions() async {
@@ -61,6 +61,19 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
           ),
+
+          Positioned(
+            top: 150,
+            left: 280,
+            right: 0,
+            child:
+            Image.asset(
+              'assets/images/NotConnected.png',
+              height: 50,
+              fit: BoxFit.contain,
+            ),
+          ),
+
           Positioned(
             top: 150,
             left: 120,
@@ -130,7 +143,10 @@ class _HomePageState extends State<HomePage> {
                 final ConnectModel = ConnectionsscreenViewModel();
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => ConnectionsScreen(model: ConnectModel,),),
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        ConnectionsScreen(model: ConnectModel),
+                  ),
                 );
               },
               child: Container(

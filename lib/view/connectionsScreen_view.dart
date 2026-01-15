@@ -46,6 +46,12 @@ class ConnectionsScreen extends StatelessWidget {
                   ),
                 );
                 
+
+
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => LoadingscreenView()),
+                );
               },
               child: Container(
                 height: 80,
@@ -58,11 +64,22 @@ class ConnectionsScreen extends StatelessWidget {
                     width: 1,
                   ),
                 ),
-              child: const Text(
-                'Connect',
-                style: TextStyle(fontSize: 20, color: Colors.black)
-              )
+                child: const Text(
+                  'Connect',
+                  style: TextStyle(fontSize: 20, color: Colors.black),
+                ),
               ),
+            ),
+          ),
+
+          Positioned(
+            top: 150,
+            left: 280,
+            right: 0,
+            child: Image.asset(
+              'assets/images/NotConnected.png',
+              height: 50,
+              fit: BoxFit.contain,
             ),
           ),
 
