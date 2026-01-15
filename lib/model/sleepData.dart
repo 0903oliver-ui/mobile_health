@@ -1,3 +1,5 @@
+part of '../main.dart';
+
 class SleepData {
   final DateTime timestamp = DateTime.now();
   final int hr;
