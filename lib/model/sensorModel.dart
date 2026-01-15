@@ -1,5 +1,5 @@
-import 'package:light/light.dart';
-import 'dart:async';
+part of '../main.dart';
+
 
 
 

@@ -42,6 +42,7 @@ dependencies:
   light: ^4.1.0
   movesense_plus: ^1.1.0
   test: ^1.26.3
+  async: ^2.13.0
 
 
 dev_dependencies:

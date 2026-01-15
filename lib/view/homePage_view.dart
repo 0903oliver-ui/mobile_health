@@ -13,6 +13,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
+
     // Hent data én gang når viewet bliver oprettet.
     widget.model.loadLatestSleepScore();
 
@@ -21,6 +22,15 @@ class _HomePageState extends State<HomePage> {
     // widget.model.setLatestSleepScore(82);
   }
 
+  Future<void> requestPermissions() async {
+    if (!mounted) return;
+
+    await [
+      Permission.bluetooth,
+      Permission.bluetoothScan,
+      Permission.bluetoothConnect,
+    ].request();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(

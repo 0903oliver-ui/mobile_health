@@ -1,5 +1,7 @@
-import 'package:flutter/material.dart';
-import 'package:movesense_plus/movesense_plus.dart';
+part of '../main.dart';
+
+
+
 
 class MovesenseDev extends MovesenseDevice {
   MovesenseDev(String address) : super(address: address);
