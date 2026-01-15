@@ -1,7 +1,43 @@
 part of '../main.dart';
 
-class LoadingscreenView extends StatelessWidget {
-  const LoadingscreenView({super.key});
+class LoadingscreenView extends StatefulWidget {
+  const LoadingscreenView({super.key, required this.model});
+
+  final LoadingscreenViewmodel model;
+
+  @override
+  State<LoadingscreenView> createState() => _LoadingScreenViewState();
+}
+
+class _LoadingScreenViewState extends State<LoadingscreenView> {
+  late final StreamSubscription<DeviceConnectionStatus> _statusSubscription;
+
+  @override
+  void initState() {
+    super.initState();
+
+    // Listen to the statusEvents stream
+    _statusSubscription = widget.model.device!.statusEvents.listen((status) {
+      if (status == DeviceConnectionStatus.connected) {
+        _navigateToHomePage();
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _statusSubscription.cancel();
+    super.dispose();
+  }
+
+  void _navigateToHomePage() {
+    if (!mounted) return;
+
+    final homeModel = HomepageViewModel();
+    Navigator.of(context).pushReplacement(
+      MaterialPageRoute(builder: (_) => HomePage(model: homeModel)),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +52,6 @@ class LoadingscreenView extends StatelessWidget {
             left: 40,
             child: Image.asset('assets/images/loadingGif.gif'),
           ),
-
           Positioned(
             top: 150,
             left: 280,
@@ -27,7 +62,6 @@ class LoadingscreenView extends StatelessWidget {
               fit: BoxFit.contain,
             ),
           ),
-
           Positioned(
             top: -50,
             left: 0,

@@ -37,20 +37,11 @@ class ConnectionsScreen extends StatelessWidget {
             child: GestureDetector(
               onTap: () {
                 model.device?.connect();
+                final loadingModel = LoadingscreenViewmodel();
                 Navigator.push(
+                  
                   context,
-                  MaterialPageRoute(
-                    builder: (context) => (
-                      LoadingscreenView()
-                    )
-                  ),
-                );
-                
-
-
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => LoadingscreenView()),
+                  MaterialPageRoute(builder: (context) => LoadingscreenView(model: loadingModel)),
                 );
               },
               child: Container(

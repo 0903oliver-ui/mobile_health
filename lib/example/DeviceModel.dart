@@ -4,7 +4,7 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:mdsflutter/Mds.dart';
 
-import '../model/sensorModel.dart';
+import '../main.dart';
 
 class DeviceModel extends ChangeNotifier {
   String? _serial;
