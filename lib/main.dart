@@ -14,12 +14,14 @@ import 'dart:developer';
 part 'view/firstScreen_view.dart';
 part 'view/registerScreen_view.dart';
 part 'view/homePage_view.dart';
+part 'view/VerificationScreen_view.dart';
+part 'view/connectionsScreen_view.dart';
+part 'view/loadingScreen_view.dart';
+
 part 'view_model/firstScreen_viewModel.dart';
 part 'view_model/homepage_viewModel.dart';
 part 'view_model/registerScreen_viewModel.dart';
-part 'view/connectionsScreen_view.dart';
 part 'view_model/connectionsScreen_viewModel.dart';
-part 'view/loadingScreen_view.dart';
 part 'view_model/loadingScrenn_viewModel.dart';
 
 part 'model/deviceModel.dart';
@@ -44,7 +46,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         textTheme: GoogleFonts.merriweatherTextTheme(),
       ),
-      home: FirstScreenView(),
+      //home: FirstScreenView(),
+      home: VerificationscreenView()
     );
   }
 }
