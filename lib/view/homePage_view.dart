@@ -13,7 +13,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-
+    requestPermissions();
     // Hent data én gang når viewet bliver oprettet.
     widget.model.loadLatestSleepScore();
 

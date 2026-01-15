@@ -7,7 +7,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:movesense_plus/movesense_plus.dart';
 import 'package:light/light.dart';
-import 'package:async/async.dart';
+import 'dart:async';
+import 'dart:developer';
 
 
 part 'view/firstScreen_view.dart';
@@ -19,11 +20,13 @@ part 'view_model/registerScreen_viewModel.dart';
 part 'view/connectionsScreen_view.dart';
 part 'view_model/connectionsScreen_viewModel.dart';
 part 'view/loadingScreen_view.dart';
+part 'view_model/loadingScrenn_viewModel.dart';
 
 part 'model/deviceModel.dart';
 part 'model/sensorModel.dart';
-part 'model/streamModel.dart';
+part 'model/StreamModel.dart';
 part 'model/sleepData.dart';
+
 
 
 void main() {

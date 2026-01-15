@@ -41,7 +41,7 @@ class ConnectionsScreen extends StatelessWidget {
                   context,
                   MaterialPageRoute(
                     builder: (context) => (
-                      LoadingScreenView()
+                      LoadingscreenView()
                     )
                   ),
                 );

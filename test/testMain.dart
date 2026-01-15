@@ -1,5 +1,4 @@
-import 'package:flutter/foundation.dart';
-import 'package:mobile_health/mobile_health.dart';
+import '../lib/main.dart'; 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:movesense_plus/movesense_plus.dart';

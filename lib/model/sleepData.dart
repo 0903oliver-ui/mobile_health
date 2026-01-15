@@ -1,4 +1,4 @@
-part of '../mobile_health.dart';
+part of '../main.dart';
 
 class SleepData {
   final DateTime timestamp = DateTime.now();
