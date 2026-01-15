@@ -41,6 +41,7 @@ dependencies:
   provider: ^6.1.2
   light: ^4.1.0
   movesense_plus: ^1.0.0
+  test: ^1.26.3
 
 
 dev_dependencies:
