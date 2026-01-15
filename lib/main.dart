@@ -23,13 +23,12 @@ part 'view_model/homepage_viewModel.dart';
 part 'view_model/registerScreen_viewModel.dart';
 part 'view_model/connectionsScreen_viewModel.dart';
 part 'view_model/loadingScrenn_viewModel.dart';
+part 'view_model/verificationScreen_viewModel.dart';
 
 part 'model/deviceModel.dart';
 part 'model/sensorModel.dart';
 part 'model/StreamModel.dart';
 part 'model/sleepData.dart';
-
-
 
 void main() {
   runApp(const MyApp());
@@ -46,8 +45,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         textTheme: GoogleFonts.merriweatherTextTheme(),
       ),
-      //home: FirstScreenView(),
-      home: VerificationscreenView()
+      home: FirstScreenView(),
     );
   }
 }

@@ -41,7 +41,7 @@ class _LoadingScreenViewState extends State<LoadingscreenView> {
 
     final homeModel = HomepageViewModel();
     Navigator.of(context).pushReplacement(
-      MaterialPageRoute(builder: (_) => HomePage(model: homeModel)),
+      MaterialPageRoute(builder: (_) => VerificationscreenView()),
     );
   }
 
