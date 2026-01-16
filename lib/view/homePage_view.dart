@@ -31,6 +31,7 @@ class _HomePageState extends State<HomePage> {
       Permission.bluetoothConnect,
     ].request();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -163,7 +164,9 @@ class _HomePageState extends State<HomePage> {
             child: StreamBuilder<MovesenseHR>(
               stream: widget.model.heartRateStream,
               builder: (context, snapshot) {
-                final hrValue = snapshot.hasData ? '${snapshot.data?.average}' : '--';
+                final hrValue = snapshot.hasData
+                    ? '${snapshot.data?.average}'
+                    : '--';
                 return Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -173,46 +176,140 @@ class _HomePageState extends State<HomePage> {
                     ),
                     Text(
                       '$hrValue BPM',
-                      style: const TextStyle(fontSize: 20, color: Colors.black, fontWeight: FontWeight.bold),
+                      style: const TextStyle(
+                        fontSize: 20,
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ],
                 );
               },
             ),
           ),
-
           Positioned(
-            bottom: 50,
-            left: 40,
-            right: 40,
-            child: GestureDetector(
-              onTap: () {
-                final ConnectModel = ConnectionsscreenViewModel();
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) =>
-                        ConnectionsScreen(model: ConnectModel),
+            child: widget.model.device?.statusEvents == null
+                ? Positioned(
+                    bottom: 50,
+                    left: 40,
+                    right: 40,
+                    child: GestureDetector(
+                      onTap: () {
+                        final ConnectModel = ConnectionsscreenViewModel();
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                ConnectionsScreen(model: ConnectModel),
+                          ),
+                        );
+                      },
+                      child: Container(
+                        height: 80,
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                          color: const Color.fromRGBO(73, 182, 255, 1),
+                          borderRadius: BorderRadius.circular(10),
+                          border: Border.all(
+                            color: const Color.fromARGB(255, 0, 0, 0),
+                            width: 1,
+                          ),
+                        ),
+                        child: const Text(
+                          'Connect to sensor',
+                          style: TextStyle(fontSize: 24, color: Colors.black),
+                        ),
+                      ),
+                    ),
+                  )
+                : StreamBuilder<DeviceConnectionStatus>(
+                    stream: widget.model.device!.statusEvents,
+                    initialData: widget.model.device!.status,
+                    builder: (context, snapshot) {
+                      final isConnected =
+                          snapshot.data == DeviceConnectionStatus.connected;
+                      final asset = isConnected
+                          ? Positioned(
+                              bottom: 50,
+                              left: 40,
+                              right: 40,
+                              child: GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => SleepscreenView(),
+                                    ),
+                                  );
+                                },
+                                child: Container(
+                                  height: 80,
+                                  alignment: Alignment.center,
+                                  decoration: BoxDecoration(
+                                    color: const Color.fromRGBO(
+                                      104,
+                                      182,
+                                      0,
+                                      0.5,
+                                    ),
+                                    borderRadius: BorderRadius.circular(35),
+                                  ),
+                                  child: const Text(
+                                    'START',
+                                    style: TextStyle(
+                                      fontSize: 24,
+                                      color: Colors.black,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            )
+                          : Positioned(
+                              bottom: 50,
+                              left: 40,
+                              right: 40,
+                              child: GestureDetector(
+                                onTap: () {
+                                  final ConnectModel =
+                                      ConnectionsscreenViewModel();
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => ConnectionsScreen(
+                                        model: ConnectModel,
+                                      ),
+                                    ),
+                                  );
+                                },
+                                child: Container(
+                                  height: 80,
+                                  alignment: Alignment.center,
+                                  decoration: BoxDecoration(
+                                    color: const Color.fromRGBO(
+                                      73,
+                                      182,
+                                      255,
+                                      1,
+                                    ),
+                                    borderRadius: BorderRadius.circular(10),
+                                    border: Border.all(
+                                      color: const Color.fromARGB(255, 0, 0, 0),
+                                      width: 1,
+                                    ),
+                                  ),
+                                  child: const Text(
+                                    'Connect to sensor',
+                                    style: TextStyle(
+                                      fontSize: 24,
+                                      color: Colors.black,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            );
+                      return asset;
+                    },
                   ),
-                );
-              },
-              child: Container(
-                height: 80,
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  color: const Color.fromRGBO(73, 182, 255, 1),
-                  borderRadius: BorderRadius.circular(10),
-                  border: Border.all(
-                    color: const Color.fromARGB(255, 0, 0, 0),
-                    width: 1,
-                  ),
-                ),
-                child: const Text(
-                  'Connect to sensor',
-                  style: TextStyle(fontSize: 24, color: Colors.black),
-                ),
-              ),
-            ),
           ),
         ],
       ),
