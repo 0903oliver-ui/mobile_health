@@ -15,7 +15,7 @@ import 'package:flutter_arc_text/flutter_arc_text.dart';
 part 'view/firstScreen_view.dart';
 part 'view/registerScreen_view.dart';
 part 'view/homePage_view.dart';
-part 'view/VerificationScreen_view.dart';
+part 'view/verrificationScreen_view.dart';
 part 'view/connectionsScreen_view.dart';
 part 'view/loadingScreen_view.dart';
 part 'view/sleepScreen_view.dart';
