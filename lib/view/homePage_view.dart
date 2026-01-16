@@ -254,7 +254,7 @@ class _HomePageState extends State<HomePage> {
         onTap: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => SleepscreenView()),
+            MaterialPageRoute(builder: (context) => SleepscreenView(homeModel: widget.model)),
           );
         },
         child: Container(

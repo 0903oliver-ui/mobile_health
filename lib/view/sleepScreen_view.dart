@@ -1,7 +1,9 @@
 part of '../main.dart';
 
 class SleepscreenView extends StatelessWidget {
-  const SleepscreenView({super.key});
+  const SleepscreenView({super.key, required this.homeModel});
+
+  final HomepageViewModel homeModel;
 
   @override
   Widget build(BuildContext context) {
@@ -72,21 +74,21 @@ class SleepscreenView extends StatelessWidget {
             ),
           ),
 
-          // STOP-knap (rettet)
+          // STOP-knap
           Positioned(
             bottom: 50,
             left: 20,
             right: 20,
             child: GestureDetector(
               onTap: () {
-                final homeModel = HomepageViewModel();
+                // Her kan I evt. stoppe session/logning, hvis I har logik til det.
+                // homeModel.stopSleepSession(); // eksempel
 
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => HomePage(model: homeModel),
-                  ),
-                );
+                // Gå tilbage til den HomePage der allerede er i stacken (med device)
+                Navigator.pop(context);
+
+                // Hvis du vil tvinge UI refresh efter stop:
+                // homeModel.refresh();
               },
               child: Container(
                 height: 80,
