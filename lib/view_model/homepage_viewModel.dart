@@ -1,9 +1,21 @@
-part of '../main.dart';
+part of LukOjeApp;
 
 class HomepageViewModel extends ChangeNotifier {
+  final MovesenseDev? device;
+
+  HomepageViewModel({this.device});
+
   int? _latestSleepScore;
 
   int? get latestSleepScore => _latestSleepScore;
+
+  // TEMPORARY: Heart rate stream from connected device
+  // Exposes the device's `hr` stream to the View layer while keeping
+  // domain logic inside the ViewModel (MVVM).
+  // - Returns `Stream.empty()` when no device is present to avoid nulls.
+  // - TEMPORARY: this is a simple passthrough; replace with proper
+  //   domain/service abstraction when persisting or processing HR data.
+  Stream<MovesenseHR> get heartRateStream => device?.hr ?? Stream.empty();
 
   /// Convenience getters for the View (keeps UI logic out of the View).
   String get sleepScoreTitle =>
