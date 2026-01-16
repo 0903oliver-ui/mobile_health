@@ -9,8 +9,16 @@ class StreamModel{
   StreamSubscription<String>? lightSubscription;
 
   StreamModel(this.device){
+
+  }
+
+  void startStream(){
     if(device.status == DeviceConnectionStatus.connected){
-      lightSensor.start();
+      lightSubscription = lightSensor.readings.listen((reading) {
+        // TEMPORARY: currently we just log light sensor readings. Replace with
+        // persistence or processing logic as needed.
+        //debugPrint('Light Sensor Reading: $reading');
+      });
       // Subscribe to the device's HR stream here. This establishes a
       // listener to the domain stream `device.hr` and will receive
       // `MovesenseHR` samples as they arrive from the device.
