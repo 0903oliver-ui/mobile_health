@@ -92,7 +92,7 @@ class SleepscreenView extends StatelessWidget {
                 height: 80,
                 decoration: BoxDecoration(
                   color: const Color.fromRGBO(255, 5, 5, 0.5),
-                  borderRadius: BorderRadius.circular(20),
+                  borderRadius: BorderRadius.circular(35),
                 ),
                 alignment: Alignment.center,
                 child: const Text(

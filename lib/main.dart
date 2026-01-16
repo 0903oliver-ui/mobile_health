@@ -48,8 +48,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         textTheme: GoogleFonts.merriweatherTextTheme(),
       ),
-      // home: FirstScreenView(),
-      home: SleepscreenView()
+      home: FirstScreenView(),
     );
   }
 }
