@@ -1,8 +1,5 @@
 part of '../main.dart';
 
-
-
-
 class MovesenseDev extends MovesenseDevice {
   MovesenseDev(String address) : super(address: address);
 
