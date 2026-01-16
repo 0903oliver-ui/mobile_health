@@ -38,8 +38,9 @@ class _LoadingScreenViewState extends State<LoadingscreenView> {
 
   void _navigateToHomePage() {
     if (!mounted) return;
-
-    final homeModel = HomepageViewModel();
+    // Pass the connected device into the HomePage view-model so the
+    // HomePage can listen to the same `statusEvents` and `hr` streams.
+    final homeModel = HomepageViewModel(device: widget.model.device);
     Navigator.of(context).pushReplacement(
       MaterialPageRoute(builder: (_) => HomePage(model: homeModel)),
     );
@@ -62,11 +63,33 @@ class _LoadingScreenViewState extends State<LoadingscreenView> {
             top: 150,
             left: 280,
             right: 0,
-            child: Image.asset(
-              'assets/images/NotConnected.png',
-              height: 50,
-              fit: BoxFit.contain,
-            ),
+            // This StreamBuilder listens to `widget.model.device.statusEvents`.
+            // It uses `initialData` set to the device's current `status` so
+            // the UI displays the right icon immediately. When the device
+            // emits new statuses (connecting, connected, disconnected),
+            // the builder rebuilds and updates the icon.
+            child: widget.model.device?.statusEvents == null
+                ? Image.asset(
+                    'assets/images/NotConnected.png',
+                    height: 50,
+                    fit: BoxFit.contain,
+                  )
+                : StreamBuilder<DeviceConnectionStatus>(
+                    stream: widget.model.device!.statusEvents,
+                    initialData: widget.model.device!.status,
+                    builder: (context, snapshot) {
+                      final isConnected =
+                          snapshot.data == DeviceConnectionStatus.connected;
+                      final asset = isConnected
+                          ? 'assets/images/Connected.png'
+                          : 'assets/images/NotConnected.png';
+                      return Image.asset(
+                        asset,
+                        height: 50,
+                        fit: BoxFit.contain,
+                      );
+                    },
+                  ),
           ),
           Positioned(
             top: -50,

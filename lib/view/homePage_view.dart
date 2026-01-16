@@ -66,12 +66,28 @@ class _HomePageState extends State<HomePage> {
             top: 150,
             left: 280,
             right: 0,
-            child:
-            Image.asset(
-              'assets/images/NotConnected.png',
-              height: 50,
-              fit: BoxFit.contain,
-            ),
+            child: widget.model.device?.statusEvents == null
+                ? Image.asset(
+                    'assets/images/NotConnected.png',
+                    height: 50,
+                    fit: BoxFit.contain,
+                  )
+                : StreamBuilder<DeviceConnectionStatus>(
+                    stream: widget.model.device!.statusEvents,
+                    initialData: widget.model.device!.status,
+                    builder: (context, snapshot) {
+                      final isConnected =
+                          snapshot.data == DeviceConnectionStatus.connected;
+                      final asset = isConnected
+                          ? 'assets/images/Connected.png'
+                          : 'assets/images/NotConnected.png';
+                      return Image.asset(
+                        asset,
+                        height: 50,
+                        fit: BoxFit.contain,
+                      );
+                    },
+                  ),
           ),
 
           Positioned(
@@ -129,6 +145,37 @@ class _HomePageState extends State<HomePage> {
                       ],
                     ),
                   ),
+                );
+              },
+            ),
+          ),
+
+          // TEMPORARY: Heart rate display when device is connected
+          // This StreamBuilder listens to the `heartRateStream` exposed by
+          // `HomepageViewModel`. The ViewModel simply forwards `device.hr`.
+          // When the device emits HR samples, the builder rebuilds and the
+          // numeric BPM value is updated. This block is intentionally
+          // minimal (plain text) and marked TEMPORARY for later refactor.
+          Positioned(
+            top: 490,
+            left: 40,
+            right: 40,
+            child: StreamBuilder<MovesenseHR>(
+              stream: widget.model.heartRateStream,
+              builder: (context, snapshot) {
+                final hrValue = snapshot.hasData ? '${snapshot.data?.average}' : '--';
+                return Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text(
+                      'Heart Rate',
+                      style: TextStyle(fontSize: 14, color: Colors.black),
+                    ),
+                    Text(
+                      '$hrValue BPM',
+                      style: const TextStyle(fontSize: 20, color: Colors.black, fontWeight: FontWeight.bold),
+                    ),
+                  ],
                 );
               },
             ),
