@@ -1,4 +1,4 @@
-part of '../main.dart';
+part of LukOjeApp;
 
 class HomePage extends StatefulWidget {
   const HomePage({required this.model, super.key});

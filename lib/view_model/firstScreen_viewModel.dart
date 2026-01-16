@@ -1,4 +1,4 @@
-part of '../main.dart';
+part of LukOjeApp;
 
 class FirstScreenViewmodel extends ChangeNotifier{
 

@@ -1,4 +1,4 @@
-part of '../main.dart';
+part of LukOjeApp;
 
 class ConnectionsScreen extends StatelessWidget {
   const ConnectionsScreen({super.key, required this.model});

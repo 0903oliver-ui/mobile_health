@@ -1,4 +1,4 @@
-part of '../main.dart';
+part of LukOjeApp;
 
 class FirstScreenView extends StatelessWidget {
   const FirstScreenView({super.key});

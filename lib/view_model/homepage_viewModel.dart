@@ -1,4 +1,4 @@
-part of '../main.dart';
+part of LukOjeApp;
 
 class HomepageViewModel extends ChangeNotifier {
   final MovesenseDev? device;

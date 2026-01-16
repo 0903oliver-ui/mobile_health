@@ -1,4 +1,4 @@
-part of '../main.dart';
+part of LukOjeApp;
 
 class ConnectionsscreenViewModel extends ChangeNotifier {
   String adress = '';

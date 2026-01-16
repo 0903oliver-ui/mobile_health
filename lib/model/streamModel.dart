@@ -1,4 +1,4 @@
-part of '../main.dart';
+part of LukOjeApp;
 
 //'0C:8C:DC:1B:23:16'
 class StreamModel{
@@ -11,11 +11,13 @@ class StreamModel{
   StreamModel(this.device){
     if(device.status == DeviceConnectionStatus.connected){
       lightSensor.start();
+      // Subscribe to the device's HR stream here. This establishes a
+      // listener to the domain stream `device.hr` and will receive
+      // `MovesenseHR` samples as they arrive from the device.
       hrSubscription = device.hr.listen((hr) {
-      //Timer.periodic(Duration(minutes: 5), (_) {
-      //saveToDB();
-    //});
-      debugPrint('Heart Rate: ${hr.average}, r-r: ${hr.rr}');
+        // TEMPORARY: currently we just log HR samples. Replace with
+        // persistence or processing logic as needed.
+        //debugPrint('Heart Rate: ${hr.average}, r-r: ${hr.rr}');
       });
     }else{
       /// Throws an exception when the device is not connected.

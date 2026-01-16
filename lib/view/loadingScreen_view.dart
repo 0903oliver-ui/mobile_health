@@ -1,4 +1,4 @@
-part of '../main.dart';
+part of LukOjeApp;
 
 class LoadingscreenView extends StatefulWidget {
   const LoadingscreenView({super.key, required this.model});
