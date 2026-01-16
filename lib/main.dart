@@ -30,7 +30,7 @@ part 'view_model/sleepScreen_viewModel.dart';
 
 part 'model/deviceModel.dart';
 part 'model/sensorModel.dart';
-part 'model/StreamModel.dart';
+part 'model/streamModell.dart';
 part 'model/sleepData.dart';
 
 void main() {

@@ -1,4 +1,4 @@
-part of '../main.dart';
+part of LukOjeApp;
 
 class SleepData {
   final DateTime timestamp = DateTime.now();

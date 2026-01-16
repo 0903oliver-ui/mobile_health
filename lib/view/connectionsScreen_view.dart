@@ -1,4 +1,4 @@
-part of '../main.dart';
+part of LukOjeApp;
 
 class ConnectionsScreen extends StatelessWidget {
   const ConnectionsScreen({super.key, required this.model});
@@ -66,10 +66,45 @@ class ConnectionsScreen extends StatelessWidget {
             top: 150,
             left: 280,
             right: 0,
-            child: Image.asset(
-              'assets/images/NotConnected.png',
-              height: 50,
-              fit: BoxFit.contain,
+            // ListenableBuilder listens to the view-model (`model`).
+            // When `setAdress` creates a `MovesenseDev` and calls
+            // `notifyListeners()`, this builder runs so we can attach
+            // a StreamBuilder to `model.device.statusEvents`.
+            child: ListenableBuilder(
+              listenable: model,
+              builder: (context, _) {
+                // If device (and its status stream) isn't created yet,
+                // show the default NotConnected icon.
+                if (model.device?.statusEvents == null) {
+                  return Image.asset(
+                    'assets/images/NotConnected.png',
+                    height: 50,
+                    fit: BoxFit.contain,
+                  );
+                }
+
+                // StreamBuilder attaches to the device's `statusEvents` stream.
+                // - `initialData: model.device!.status` ensures we display the
+                //   current connection state immediately (no waiting for next event).
+                // - When the device emits status changes, StreamBuilder rebuilds
+                //   and the icon swaps between Connected/NotConnected images.
+                return StreamBuilder<DeviceConnectionStatus>(
+                  stream: model.device!.statusEvents,
+                  initialData: model.device!.status,
+                  builder: (context, snapshot) {
+                    final isConnected =
+                        snapshot.data == DeviceConnectionStatus.connected;
+                    final asset = isConnected
+                        ? 'assets/images/Connected.png'
+                        : 'assets/images/NotConnected.png';
+                    return Image.asset(
+                      asset,
+                      height: 50,
+                      fit: BoxFit.contain,
+                    );
+                  },
+                );
+              },
             ),
           ),
 
