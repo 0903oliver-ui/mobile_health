@@ -8,7 +8,7 @@ class MovesenseDev extends MovesenseDevice {
 
   @override
   Future<void> connect() async {
-    await super.connect();
+    super.connect();
     
     // Wait for the device to be fully connected before retrieving battery status
     int attempts = 0;

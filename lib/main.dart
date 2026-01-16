@@ -24,7 +24,7 @@ part 'view_model/loadingScrenn_viewModel.dart';
 
 part 'model/deviceModel.dart';
 part 'model/sensorModel.dart';
-part 'model/StreamModel.dart';
+part 'model/streamModel.dart';
 part 'model/sleepData.dart';
 
 
