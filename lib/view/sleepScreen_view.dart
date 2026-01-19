@@ -1,7 +1,9 @@
 part of '../main.dart';
 
 class SleepscreenView extends StatelessWidget {
-  const SleepscreenView({super.key});
+  const SleepscreenView({super.key, this.device});
+
+  final MovesenseDevice? device;
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +64,7 @@ class SleepscreenView extends StatelessWidget {
             right: 20,
             child: ArcText(
               radius: 120,
-              text: 'SLEEP THIGHT!',
+              text: 'SLEEP TIGHT!',
               textStyle: const TextStyle(
                 fontSize: 24,
                 color: Color.fromRGBO(9, 62, 174, 1),
@@ -79,6 +81,8 @@ class SleepscreenView extends StatelessWidget {
             right: 20,
             child: GestureDetector(
               onTap: () {
+                device?.hr.drain();
+                debugPrint("Stopped listening to heart rate stream");
                 final homeModel = HomepageViewModel();
 
                 Navigator.push(

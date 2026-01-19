@@ -47,7 +47,7 @@ class _LoadingScreenViewState extends State<LoadingscreenView> {
     // VIGTIGT: Lav homeModel med device, så HomePage kan se connection-state.
     final homeModel = HomepageViewModel(device: widget.model.device);
 
-    Navigator.of(context).pushReplacement(
+    Navigator.of(context as BuildContext).pushReplacement(
       MaterialPageRoute(
         builder: (_) => VerificationscreenView(homeModel: homeModel),
       ),

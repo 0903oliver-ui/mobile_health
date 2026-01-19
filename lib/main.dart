@@ -10,6 +10,10 @@ import 'package:light/light.dart';
 import 'dart:async';
 import 'dart:developer';
 import 'package:flutter_arc_text/flutter_arc_text.dart';
+import 'package:sembast/sembast_io.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:path/path.dart';
+import 'package:sembast/sembast.dart';
 
 
 part 'view/firstScreen_view.dart';
@@ -32,6 +36,7 @@ part 'model/deviceModel.dart';
 part 'model/sensorModel.dart';
 part 'model/streamModell.dart';
 part 'model/sleepData.dart';
+part 'model/database.dart';
 
 void main() {
   runApp(const MyApp());

@@ -252,9 +252,33 @@ class _HomePageState extends State<HomePage> {
 
   Widget _startButton(BuildContext context) => GestureDetector(
         onTap: () {
+          int? lastRrMs;
+          int? lastHr;
+
+          MovesenseState? moveState;
+
+          widget.model.device?.hr.listen((hr) {
+            lastRrMs = hr.rr;
+            lastHr = hr.average;
+          });
+
+          widget.model.device?.getStateEvents(SystemStateComponent.movement).listen((state) {
+            moveState = state;
+          });
+
+          Timer.periodic(const Duration(seconds: 5), (timer) {
+            if (lastRrMs != null) {
+              debugPrint('HRV: $lastRrMs ms');
+              debugPrint('Heart Rate: $lastHr BPM');
+              debugPrint('Movement State: ${moveState.toString()}');
+            }
+          });
+
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => SleepscreenView()),
+            MaterialPageRoute(
+              builder: (context) => SleepscreenView(device: widget.model.device),
+            ),
           );
         },
         child: Container(
