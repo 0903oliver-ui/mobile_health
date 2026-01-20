@@ -1,10 +1,12 @@
 part of LukOjeApp;
 
 class SleepData {
-  final DateTime timestamp = DateTime.now();
-  final int hr;
-  final int rr;
-  final int lux;
+  DateTime timestamp = DateTime.now();
+  List<int> hr = [];
+  List<int> rr = [];
+  List<int> lux = [];
+  List<MovesenseDeviceState> events = [];
+
   
   SleepData(this.hr, this.rr, this.lux);
 }

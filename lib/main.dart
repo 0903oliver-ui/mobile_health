@@ -1,8 +1,6 @@
 library LukOjeApp;
 
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:movesense_plus/movesense_plus.dart';
@@ -13,7 +11,6 @@ import 'package:flutter_arc_text/flutter_arc_text.dart';
 import 'package:sembast/sembast_io.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart';
-import 'package:sembast/sembast.dart';
 
 
 part 'view/firstScreen_view.dart';

@@ -4,17 +4,27 @@ part of LukOjeApp;
 class StreamModel{
   final MovesenseDev device;
   final Sensor lightSensor = LightSensor();
+  late SleepData sleepData;
+  
 
+  StreamSubscription<MovesenseDeviceState>? stateSubscription;
   StreamSubscription<MovesenseHR>? hrSubscription;
   StreamSubscription<String>? lightSubscription;
 
-  StreamModel(this.device){
-
-  }
+  StreamModel(this.device);
 
   void startStream(){
+    sleepData = SleepData([], [], []);
     if(device.status == DeviceConnectionStatus.connected){
+      stateSubscription = device..listen((state) {
+        sleepData.events.add(state);
+        // TEMPORARY: currently we just log device states. Replace with
+        // persistence or processing logic as needed.
+        //debugPrint('Device State: $state');
+      });
       lightSubscription = lightSensor.readings.listen((reading) {
+        sleepData.lux.add(int.parse(reading));
+        
         // TEMPORARY: currently we just log light sensor readings. Replace with
         // persistence or processing logic as needed.
         //debugPrint('Light Sensor Reading: $reading');
@@ -23,6 +33,11 @@ class StreamModel{
       // listener to the domain stream `device.hr` and will receive
       // `MovesenseHR` samples as they arrive from the device.
       hrSubscription = device.hr.listen((hr) {
+        sleepData.hr.add(hr.average);
+        final rr = hr.rr;
+        if (rr != null) {
+          sleepData.rr.add(rr);
+        }
         // TEMPORARY: currently we just log HR samples. Replace with
         // persistence or processing logic as needed.
         //debugPrint('Heart Rate: ${hr.average}, r-r: ${hr.rr}');
