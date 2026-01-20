@@ -1,18 +1,26 @@
 part of LukOjeApp;
 
 class MovesenseDev extends MovesenseDevice {
-  MovesenseDev(String address) : super(address: address);
+  MovesenseDev._();
+  
+  static final MovesenseDev _instance = MovesenseDev._();
 
+  factory MovesenseDev(){
+    return _instance;
+  }
+
+  void setAdress(String macA){
+    address = macA;
+  }
   @override
   Future<void> connect() async {
     super.connect();
     
     // Wait for the device to be fully connected before retrieving battery status
-    int attempts = 0;
-    while (status != DeviceConnectionStatus.connected && attempts < 10) {
-      await Future.delayed(Duration(seconds: 1));
-      attempts++;
-    }
+    await statusEvents.firstWhere(
+      (status) => status == DeviceConnectionStatus.connected,
+      orElse: () => DeviceConnectionStatus.disconnected,
+    );
     
     if (status == DeviceConnectionStatus.connected) {
       await getBatteryStatus().then(

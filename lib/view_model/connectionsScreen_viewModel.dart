@@ -9,7 +9,8 @@ class ConnectionsscreenViewModel extends ChangeNotifier {
     // Create the domain device object here. This constructs a `MovesenseDev`
     // (subclass of `MovesenseDevice`) which exposes `statusEvents` and `hr` streams.
     // The view must rebuild to attach StreamBuilders to the newly created device.
-    device = MovesenseDev(adress);
+    device = MovesenseDev();
+    device!.setAdress(adress);
     notifyListeners(); // Notify UI (ListenableBuilder) to rebuild and attach streams
   }
 }
