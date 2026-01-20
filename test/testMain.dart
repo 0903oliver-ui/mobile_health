@@ -1,4 +1,4 @@
-import '../lib/main.dart'; 
+import 'package:mobile_health/main.dart'; 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:movesense_plus/movesense_plus.dart';
@@ -35,7 +35,7 @@ void main() {
 
 
     // Disconnect the device after the test
-    await device.disconnect();
+    device.disconnect();
     await device.statusEvents.firstWhere(
       (status) => status == DeviceConnectionStatus.disconnected,
       orElse: () => DeviceConnectionStatus.connected,

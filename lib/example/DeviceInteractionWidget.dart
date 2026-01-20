@@ -8,7 +8,7 @@ import 'AppModel.dart';
 
 class DeviceInteractionWidget extends StatefulWidget {
   final Device device;
-  const DeviceInteractionWidget(this.device);
+  const DeviceInteractionWidget(this.device, {super.key});
 
   @override
   State<StatefulWidget> createState() {

@@ -105,6 +105,37 @@ class SleepSessionModel {
     _movementSub = null;
 
     _lightSensor.stop();
+    try {
+      await _saveSession();
+    } catch (e, st) {
+      debugPrint('Failed to save sleep session: $e\n$st');
+    }
+  }
+
+  Future<void> _saveSession() async {
+    final db = Database();
+    await db.init();
+    final store = db.store;
+    final database = db.database;
+    if (store == null || database == null) {
+      throw Exception('Database not initialized');
+    }
+
+    final record = <String, dynamic>{
+      'start': _startTime?.toIso8601String(),
+      'end': _endTime?.toIso8601String(),
+      'duration': _endTime != null && _startTime != null
+          ? _endTime!.difference(_startTime!)
+          : null,
+      'hr': List<int>.from(_hrBpm),
+      'rr': List<int>.from(_rrMs),
+      'lux': List<int>.from(_lux),
+      'movementEvents': _movementEvents,
+      'savedAt': DateTime.now().toIso8601String(),
+    };
+
+    // Use `add` to append a new record to the int map store.
+    await store.add(database, record);
   }
 
   SleepScoreResult computeRawScore() {

@@ -8,6 +8,8 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
 
 class ScanWidget extends StatefulWidget {
+  const ScanWidget({super.key});
+
   @override
   _ScanWidgetState createState() => _ScanWidgetState();
 }
@@ -50,8 +52,8 @@ class _ScanWidgetState extends State<ScanWidget> {
   }
 
   Widget _buildDeviceList(List<Device> deviceList) {
-    return new Expanded(
-        child: new ListView.builder(
+    return Expanded(
+        child: ListView.builder(
             itemCount: model.deviceList.length,
             itemBuilder: (BuildContext context, int index) =>
                 _buildDeviceItem(context, index)));
