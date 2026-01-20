@@ -33,4 +33,14 @@ class HomepageViewModel extends ChangeNotifier {
     _latestSleepScore = value;
     notifyListeners();
   }
+
+  SleepScreenViewModel createSleepSessionViewModel() {
+    final dev = _device;
+    if (dev == null || dev.status != DeviceConnectionStatus.connected) {
+      throw StateError('Device not connected');
+    }
+    final sessionModel = SleepSessionModel(device: dev);
+    final vm = SleepScreenViewModel(session: sessionModel);
+    return vm;
+  }
 }
