@@ -79,6 +79,7 @@ class SleepSessionModel {
     _movementSub = device.getStateEvents(SystemStateComponent.movement).listen((
       MovesenseState state,
     ) {
+      debugPrint('Movement state: $state');
       if (!_running) return;
       final isMoving = _isMovingState(state);
       if (isMoving && !lastWasMoving) _movementEvents += 1;
@@ -113,8 +114,7 @@ class SleepSessionModel {
   }
 
   Future<void> _saveSession() async {
-    final db = Database();
-    await db.init();
+    final db = await Database.getInstance();
     final store = db.store;
     final database = db.database;
     if (store == null || database == null) {
@@ -124,8 +124,8 @@ class SleepSessionModel {
     final record = <String, dynamic>{
       'start': _startTime?.toIso8601String(),
       'end': _endTime?.toIso8601String(),
-      'duration': _endTime != null && _startTime != null
-          ? _endTime!.difference(_startTime!)
+      'durationMs': _endTime != null && _startTime != null
+          ? _endTime!.difference(_startTime!).inMilliseconds
           : null,
       'hr': List<int>.from(_hrBpm),
       'rr': List<int>.from(_rrMs),
@@ -136,6 +136,7 @@ class SleepSessionModel {
 
     // Use `add` to append a new record to the int map store.
     await store.add(database, record);
+    debugPrint('Sleep session saved to database.');
   }
 
   SleepScoreResult computeRawScore() {
