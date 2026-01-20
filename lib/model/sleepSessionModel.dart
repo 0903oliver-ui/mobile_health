@@ -76,13 +76,31 @@ class SleepSessionModel {
     });
 
     bool lastWasMoving = false;
-    _movementSub = device.getStateEvents(SystemStateComponent.movement).listen((
-      MovesenseState state,
-    ) {
-      debugPrint('Movement state: $state');
-      if (!_running) return;
+    DateTime? lastMovementDetected;
+
+    _movementSub = device.getStateEvents(SystemStateComponent.movement).listen((state) {
+      // Only process movement events while session is running
+      if (!_running) {
+        // still print raw for debugging when not running
+        debugPrint('Movement state (raw, not running): $state');
+        return;
+      }
+
       final isMoving = _isMovingState(state);
-      if (isMoving && !lastWasMoving) _movementEvents += 1;
+      final now = DateTime.now();
+
+      debugPrint('Movement state: $state  isMoving=$isMoving lastWasMoving=$lastWasMoving lastMovementDetected=${lastMovementDetected?.toIso8601String()}');
+
+      // only count a new movement when we transition inactive->active
+      if (isMoving && !lastWasMoving) {
+        // debounce multiple triggers within 1s
+        if (lastMovementDetected == null || now.difference(lastMovementDetected!) > Duration(seconds: 1)) {
+          _movementEvents += 1;
+          lastMovementDetected = now;
+          debugPrint('Movement event ++ ($_movementEvents)');
+        }
+      }
+
       lastWasMoving = isMoving;
     });
   }
@@ -214,14 +232,17 @@ class SleepSessionModel {
   }
 
   static bool _isMovingState(MovesenseState state) {
-    // Jeres MovesenseState er ikke typed til bool i jeres kodebase.
-    // Derfor bruger vi en robust string-heuristik (kan raffineres efter log).
+    // Robustly detect moving/not-moving from various string forms.
     final s = state.toString().toLowerCase();
-    if (s.contains('inactive')) return false;
-    if (s.contains('false')) return false;
-    if (s.contains('active')) return true;
-    if (s.contains('true')) return true;
-    return s.contains('movement');
+    // explicit negative forms
+    if (s.contains('notmoving') || s.contains('not moving') || s.contains('inactive') || s.contains('false') || s.contains('nomotion')) {
+      return false;
+    }
+    // positive forms
+    if (s.contains('moving') || s.contains('movement') || s.contains('active') || s.contains('true') || s.contains('motion')) {
+      return true;
+    }
+    return false;
   }
 
   static double? _computeRmssdMs(List<int> rrMs) {
