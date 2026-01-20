@@ -1,9 +1,8 @@
 part of '../main.dart';
 
 class SleepscreenView extends StatelessWidget {
-  const SleepscreenView({super.key, this.device});
-
-  final MovesenseDevice? device;
+  const SleepscreenView({super.key, required this.model});
+  final SleepScreenViewModel model;
 
   @override
   Widget build(BuildContext context) {
@@ -79,29 +78,28 @@ class SleepscreenView extends StatelessWidget {
             bottom: 50,
             left: 20,
             right: 20,
-            child: GestureDetector(
-              onTap: () {
-                device?.hr.drain();
-                debugPrint("Stopped listening to heart rate stream");
-                final homeModel = HomepageViewModel();
-
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => HomePage(model: homeModel),
+            child: ListenableBuilder(
+              listenable: model,
+              builder: (context, _) => GestureDetector(
+                onTap: model.isStopping
+                    ? null
+                    : () async {
+                        final result = await model.stopSession();
+                        if (context.mounted) Navigator.pop(context, result);
+                      },
+                child: Container(
+                  height: 80,
+                  decoration: BoxDecoration(
+                    color: model.isStopping
+                        ? const Color.fromRGBO(200, 200, 200, 1)
+                        : const Color.fromRGBO(255, 5, 5, 0.5),
+                    borderRadius: BorderRadius.circular(35),
                   ),
-                );
-              },
-              child: Container(
-                height: 80,
-                decoration: BoxDecoration(
-                  color: const Color.fromRGBO(255, 5, 5, 0.5),
-                  borderRadius: BorderRadius.circular(35),
-                ),
-                alignment: Alignment.center,
-                child: const Text(
-                  'STOP',
-                  style: TextStyle(fontSize: 24, color: Colors.white),
+                  alignment: Alignment.center,
+                  child: Text(
+                    model.isStopping ? 'STOPPING...' : 'STOP',
+                    style: const TextStyle(fontSize: 24, color: Colors.white),
+                  ),
                 ),
               ),
             ),

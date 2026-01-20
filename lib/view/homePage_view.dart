@@ -85,11 +85,7 @@ class _HomePageState extends State<HomePage> {
                     final asset = isConnected
                         ? 'assets/images/Connected.png'
                         : 'assets/images/NotConnected.png';
-                    return Image.asset(
-                      asset,
-                      height: 50,
-                      fit: BoxFit.contain,
-                    );
+                    return Image.asset(asset, height: 50, fit: BoxFit.contain);
                   },
                 );
               },
@@ -164,8 +160,9 @@ class _HomePageState extends State<HomePage> {
             child: StreamBuilder<MovesenseHR>(
               stream: widget.model.heartRateStream,
               builder: (context, snapshot) {
-                final hrValue =
-                    snapshot.hasData ? '${snapshot.data?.average}' : '--';
+                final hrValue = snapshot.hasData
+                    ? '${snapshot.data?.average}'
+                    : '--';
                 return Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -223,77 +220,58 @@ class _HomePageState extends State<HomePage> {
   void refreshSleepScore() => widget.model.refresh();
 
   Widget _connectButton(BuildContext context) => GestureDetector(
-        onTap: () {
-          final connectModel = ConnectionsscreenViewModel();
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => ConnectionsScreen(model: connectModel),
-            ),
-          );
-        },
-        child: Container(
-          height: 80,
-          alignment: Alignment.center,
-          decoration: BoxDecoration(
-            color: const Color.fromRGBO(73, 182, 255, 1),
-            borderRadius: BorderRadius.circular(10),
-            border: Border.all(
-              color: const Color.fromARGB(255, 0, 0, 0),
-              width: 1,
-            ),
-          ),
-          child: const Text(
-            'Connect to sensor',
-            style: TextStyle(fontSize: 24, color: Colors.black),
-          ),
+    onTap: () {
+      final connectModel = ConnectionsscreenViewModel();
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => ConnectionsScreen(model: connectModel),
         ),
       );
+    },
+    child: Container(
+      height: 80,
+      alignment: Alignment.center,
+      decoration: BoxDecoration(
+        color: const Color.fromRGBO(73, 182, 255, 1),
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(color: const Color.fromARGB(255, 0, 0, 0), width: 1),
+      ),
+      child: const Text(
+        'Connect to sensor',
+        style: TextStyle(fontSize: 24, color: Colors.black),
+      ),
+    ),
+  );
 
   Widget _startButton(BuildContext context) => GestureDetector(
-        onTap: () {
-          int? lastRrMs;
-          int? lastHr;
+    onTap: () async {
+      final sleepVm = widget.model.createSleepSessionViewModel();
+      await sleepVm.startSession();
 
-          MovesenseState? moveState;
-
-          widget.model.device?.hr.listen((hr) {
-            lastRrMs = hr.rr;
-            lastHr = hr.average;
-          });
-
-          widget.model.device?.getStateEvents(SystemStateComponent.movement).listen((state) {
-            moveState = state;
-          });
-
-          Timer.periodic(const Duration(seconds: 5), (timer) {
-            if (lastRrMs != null) {
-              debugPrint('HRV: $lastRrMs ms');
-              debugPrint('Heart Rate: $lastHr BPM');
-              debugPrint('Movement State: ${moveState.toString()}');
-            }
-          });
-
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => SleepscreenView(device: widget.model.device),
-            ),
-          );
-        },
-        child: Container(
-          height: 80,
-          alignment: Alignment.center,
-          decoration: BoxDecoration(
-            color: const Color.fromRGBO(104, 182, 0, 0.5),
-            borderRadius: BorderRadius.circular(35),
-          ),
-          child: const Text(
-            'START',
-            style: TextStyle(fontSize: 24, color: Colors.black),
-          ),
-        ),
+      final result = await Navigator.push<SleepScoreResult>(
+        context,
+        MaterialPageRoute(builder: (_) => SleepscreenView(model: sleepVm)),
       );
+
+      if (result != null) {
+        widget.model.setLatestSleepScore(result.score0to100);
+        // Her kan I senere gemme til DB.
+      }
+    },
+    child: Container(
+      height: 80,
+      alignment: Alignment.center,
+      decoration: BoxDecoration(
+        color: const Color.fromRGBO(104, 182, 0, 0.5),
+        borderRadius: BorderRadius.circular(35),
+      ),
+      child: const Text(
+        'START',
+        style: TextStyle(fontSize: 24, color: Colors.black),
+      ),
+    ),
+  );
 }
 
 
