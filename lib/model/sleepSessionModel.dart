@@ -149,6 +149,8 @@ class SleepSessionModel {
       'rr': List<int>.from(_rrMs),
       'lux': List<int>.from(_lux),
       'movementEvents': _movementEvents,
+      'HRV RMSSDms': computeRawScore().rmssdMs,
+      'score': computeRawScore().score0to100,
       'savedAt': DateTime.now().toIso8601String(),
     };
 
