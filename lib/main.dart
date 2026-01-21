@@ -32,8 +32,6 @@ part 'view_model/sleepScreen_viewModel.dart';
 
 part 'model/deviceModel.dart';
 part 'model/sensorModel.dart';
-part 'model/streamModell.dart';
-part 'model/sleepData.dart';
 part 'model/database.dart';
 part 'model/sleepSessionModel.dart';
 

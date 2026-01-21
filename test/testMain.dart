@@ -6,7 +6,8 @@ import 'package:movesense_plus/movesense_plus.dart';
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
-  final MovesenseDev device = MovesenseDev('0C:8C:DC:1B:23:16');
+  final MovesenseDev device = MovesenseDev();
+  device.setAdress('0C:8C:DC:1B:23:16');
 
   test('test movesense connect using movesense_plus plugin', () async {
     // Request necessary permissions
