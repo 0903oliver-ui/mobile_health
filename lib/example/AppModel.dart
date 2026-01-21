@@ -7,7 +7,7 @@ import 'package:mdsflutter/Mds.dart';
 import 'DeviceConnectionStatus.dart';
 
 class AppModel extends ChangeNotifier {
-  final Set<Device> _deviceList = Set();
+  final Set<Device> _deviceList = {};
   bool _isScanning = false;
   void Function(Device)? _onDeviceMdsConnectedCb;
   void Function(Device)? _onDeviceDisonnectedCb;
@@ -28,11 +28,11 @@ class AppModel extends ChangeNotifier {
   }
 
   void startScan() {
-    _deviceList.forEach((device) {
+    for (var device in _deviceList) {
       if (device.connectionStatus == DeviceConnectionStatus.CONNECTED) {
         disconnectFromDevice(device);
       }
-    });
+    }
 
     _deviceList.clear();
     notifyListeners();

@@ -1,4 +1,4 @@
-part of '../main.dart';
+part of LukOjeApp;
 
 class ConnectionsScreen extends StatelessWidget {
   const ConnectionsScreen({super.key, required this.model});
@@ -11,6 +11,7 @@ class ConnectionsScreen extends StatelessWidget {
       body: Stack(
         clipBehavior: Clip.none,
         children: [
+          // MAC input
           Positioned(
             bottom: 100,
             left: 30,
@@ -30,17 +31,36 @@ class ConnectionsScreen extends StatelessWidget {
             ),
           ),
 
+          // Connect button
           Positioned(
             bottom: 15,
             left: 30,
             right: 30,
             child: GestureDetector(
               onTap: () {
-                model.device?.connect();
-                final loadingModel = LoadingscreenViewmodel(device: model.device);
-                Navigator.push(
+                final dev = model.device;
+                final statusStream = model.statusEvents;
+
+                if (dev == null || statusStream == null) {
+                  debugPrint('No device/status stream yet. Enter MAC first.');
+                  return;
+                }
+
+                // Start connection
+                dev.connect();
+
+                // Create loading VM with SAME device + SAME broadcast stream
+                final loadingModel = LoadingscreenViewmodel(
+                  device: dev,
+                  statusEvents: statusStream,
+                );
+
+                // Use pushReplacement so ConnectionsScreen disposes and stops rebuilding/listening.
+                Navigator.pushReplacement(
                   context,
-                  MaterialPageRoute(builder: (context) => LoadingscreenView(model: loadingModel)),
+                  MaterialPageRoute(
+                    builder: (_) => LoadingscreenView(model: loadingModel),
+                  ),
                 );
               },
               child: Container(
@@ -62,17 +82,47 @@ class ConnectionsScreen extends StatelessWidget {
             ),
           ),
 
+          // Connection icon (reactive)
           Positioned(
             top: 150,
             left: 280,
             right: 0,
-            child: Image.asset(
-              'assets/images/NotConnected.png',
-              height: 50,
-              fit: BoxFit.contain,
+            child: ListenableBuilder(
+              listenable: model,
+              builder: (context, _) {
+                final dev = model.device;
+                final statusStream = model.statusEvents;
+
+                if (dev == null || statusStream == null) {
+                  return Image.asset(
+                    'assets/images/NotConnected.png',
+                    height: 50,
+                    fit: BoxFit.contain,
+                  );
+                }
+
+                return StreamBuilder<DeviceConnectionStatus>(
+                  stream: statusStream,
+                  initialData: dev.status,
+                  builder: (context, snapshot) {
+                    final isConnected =
+                        snapshot.data == DeviceConnectionStatus.connected;
+                    final asset = isConnected
+                        ? 'assets/images/Connected.png'
+                        : 'assets/images/NotConnected.png';
+
+                    return Image.asset(
+                      asset,
+                      height: 50,
+                      fit: BoxFit.contain,
+                    );
+                  },
+                );
+              },
             ),
           ),
 
+          // Header
           Positioned(
             top: -50,
             left: 0,

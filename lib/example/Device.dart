@@ -13,9 +13,9 @@ class Device {
     _address = address;
   }
 
-  String? get name => _name != null ? _name : "";
-  String? get address => _address != null ? _address : "";
-  String? get serial => _serial != null ? _serial : "";
+  String? get name => _name ?? "";
+  String? get address => _address ?? "";
+  String? get serial => _serial ?? "";
   DeviceConnectionStatus get connectionStatus => _connectionStatus;
 
   void onConnecting() => _connectionStatus = DeviceConnectionStatus.CONNECTING;
@@ -33,7 +33,9 @@ class Device {
   void onDisconnected() =>
       _connectionStatus = DeviceConnectionStatus.NOT_CONNECTED;
 
+  @override
   bool operator ==(o) =>
       o is Device && o._address == _address && o._name == _name;
+  @override
   int get hashCode => _address.hashCode * _name.hashCode;
 }

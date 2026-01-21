@@ -1,4 +1,4 @@
-part of '../main.dart';
+part of LukOjeApp;
 
 class RegisterScreen extends StatelessWidget {
   const RegisterScreen({super.key});

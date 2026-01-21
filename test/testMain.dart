@@ -1,4 +1,4 @@
-import '../lib/main.dart'; 
+import 'package:mobile_health/main.dart'; 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:movesense_plus/movesense_plus.dart';
@@ -6,7 +6,8 @@ import 'package:movesense_plus/movesense_plus.dart';
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
-  final MovesenseDev device = MovesenseDev('0C:8C:DC:1B:23:16');
+  final MovesenseDev device = MovesenseDev();
+  device.setAdress('0C:8C:DC:1B:23:16');
 
   test('test movesense connect using movesense_plus plugin', () async {
     // Request necessary permissions
@@ -35,7 +36,7 @@ void main() {
 
 
     // Disconnect the device after the test
-    await device.disconnect();
+    device.disconnect();
     await device.statusEvents.firstWhere(
       (status) => status == DeviceConnectionStatus.disconnected,
       orElse: () => DeviceConnectionStatus.connected,

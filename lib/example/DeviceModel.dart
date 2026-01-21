@@ -7,8 +7,8 @@ import 'package:mdsflutter/Mds.dart';
 import '../main.dart';
 
 class DeviceModel extends ChangeNotifier {
-  String? _serial;
-  String? _name;
+  final String? _serial;
+  final String? _name;
 
   String? get name => _name;
   String? get serial => _serial;
@@ -85,7 +85,7 @@ class DeviceModel extends ChangeNotifier {
   void _onNewHrData(dynamic hrData) {
     Map<String, dynamic> body = hrData["Body"];
     double hr = body["average"];
-    _hrData = hr.toStringAsFixed(1) + " bpm";
+    _hrData = "${hr.toStringAsFixed(1)} bpm";
     notifyListeners();
   }
 
@@ -99,7 +99,7 @@ class DeviceModel extends ChangeNotifier {
 
   void switchLed() {
     debugPrint("switchLed()");
-    Map<String, bool> contract = new Map<String, bool>();
+    Map<String, bool> contract = <String, bool>{};
     contract["isOn"] = !_ledStatus;
     MdsAsync.put(Mds.createRequestUri(_serial!, "/Component/Led"),
             jsonEncode(contract))
@@ -117,7 +117,7 @@ class DeviceModel extends ChangeNotifier {
       debugPrint("getTemperature value: $value");
       double kelvin = value["Measurement"];
       double temperatureVal = kelvin - 273.15;
-      _temperature = temperatureVal.toStringAsFixed(1) + " C";
+      _temperature = "${temperatureVal.toStringAsFixed(1)} C";
       notifyListeners();
     });
   }

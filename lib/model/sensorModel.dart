@@ -1,4 +1,4 @@
-part of '../main.dart';
+part of LukOjeApp;
 
 
 
@@ -43,10 +43,12 @@ class LightSensor implements Sensor {
   final StreamController<String> _readingController = StreamController<String>();
 
   LightSensor() {
-    _light.lightSensorStream.listen((luxValue) {
-        _readingController.add('Lux: $luxValue');
-    });
-  }
+  _light.lightSensorStream.listen((luxValue) {
+    if (_isRunning) {
+      _readingController.add('Lux: $luxValue');
+    }
+  });
+}
 
   @override
   Stream<String> get readings => _readingController.stream;
