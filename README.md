@@ -1,16 +1,9 @@
-# mobile_health
+# mobile_health_app
+This is the flutter mobile app for android, LukØje, made for the course 22060 Mobile Health Technology.
 
-A new Flutter project.
+## Packages, SDKs, APIs and plugins
+This app makes use of flutters standard packages and more significantly the mds_flutter plugin and movsense_plus wrapper plugin for the movesense lineup of wearable sensors and specifically the movesense HR2.
 
-## Getting Started
+The app uses sembast to store data.
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
