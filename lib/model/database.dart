@@ -7,7 +7,9 @@ class Database {
   Database._();
   static final Database _instance = Database._();
 
-  factory Database() => _instance;
+  factory Database(){
+    return _instance;
+  }
 
   bool _initialized = false;
 
