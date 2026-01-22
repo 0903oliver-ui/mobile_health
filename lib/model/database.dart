@@ -31,3 +31,5 @@ class Database {
     return _instance;
   }
 }
+// caller:
+// final db = await Database.getInstance();
