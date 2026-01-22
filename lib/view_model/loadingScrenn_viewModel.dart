@@ -2,11 +2,12 @@ part of LukOjeApp;
 
 class LoadingscreenViewmodel extends ChangeNotifier {
   LoadingscreenViewmodel({
-    required this.device,
     required this.statusEvents,
-  });
+  }){
+    device = MovesenseDev();
+  }
 
-  final MovesenseDev device;
+  MovesenseDev? device;
 
   /// MUST be broadcast (or otherwise multi-listener safe).
   final Stream<DeviceConnectionStatus> statusEvents;

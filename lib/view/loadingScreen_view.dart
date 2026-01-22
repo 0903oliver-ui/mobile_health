@@ -10,7 +10,7 @@ class LoadingscreenView extends StatelessWidget {
 
     return StreamBuilder<DeviceConnectionStatus>(
       stream: model.statusEvents,
-      initialData: dev.status,
+      initialData: dev?.status,
       builder: (context, snapshot) {
         final isConnected = snapshot.data == DeviceConnectionStatus.connected;
 
