@@ -7,9 +7,6 @@ class Database {
   Database._();
   static final Database _instance = Database._();
 
-  factory Database(){
-    return _instance;
-  }
 
   bool _initialized = false;
 
@@ -25,11 +22,8 @@ class Database {
     _initialized = true;
   }
 
-  /// Async getter that returns the singleton and ensures the DB is initialized.
   static Future<Database> getInstance() async {
     await _instance.init();
     return _instance;
   }
 }
-// caller:
-// final db = await Database.getInstance();
