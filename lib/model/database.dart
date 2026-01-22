@@ -11,9 +11,9 @@ class Database {
 
   bool _initialized = false;
 
-  Future<void> init() => _initOnce();
 
-  Future<void> _initOnce() async {
+
+  Future<void> init() async {
     if (_initialized) return;
     final dir = await getApplicationDocumentsDirectory();
     await dir.create(recursive: true);
@@ -25,7 +25,7 @@ class Database {
 
   /// Async getter that returns the singleton and ensures the DB is initialized.
   static Future<Database> getInstance() async {
-    await _instance._initOnce();
+    await _instance.init();
     return _instance;
   }
 }
