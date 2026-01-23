@@ -51,7 +51,7 @@ In order to make the data readable by pandas in python, you have to enclose the 
 
 ## Reliability of data
 
-In the jupyter notebook, it might become clear that the data received may seem noisy. 
+In the jupyter notebook, it might become clear that the data received may seem noisy. A higher resolution image can also be found at lib/pythonVis/image.png
 
 ![alt text](image-9.png)
 
