@@ -39,7 +39,7 @@ Our MovesenseDev class and Database class are both singletons. They often get us
 Singletons have a private constructor and a static _instance that holds the instance and a factory that returns the same instance
 ![alt text](image-3.png)
 
-This removes the need to always having passing the same instance of the device through other class constructors, if they need it for example.
+This removes the need to always having to pass the same instance of the device through other class constructors and simply initialise and instantiate the same instance, if they also need that instance for example.
 
 # Data storage
 The app uses Sembast for data storage. At the moment the database do not make any dumps, instead they have to be accessed through device explorer in android studios -> data -> data -> com.example.mobile_health ... -> SleepData.db
