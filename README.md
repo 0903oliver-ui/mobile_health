@@ -53,7 +53,7 @@ In order to make the data readable by pandas in python, you have to enclose the 
 
 In the jupyter notebook, it might become clear that the data received may seem noisy. 
 
-![alt text](image-10.png)
+![alt text](image-9.png)
 
 A small attempt was made to determine the reliability of the data collected from the movesense device. The mean and standard deviation of some of the data collected is available in the notebook and here:
 
