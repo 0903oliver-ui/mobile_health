@@ -18,6 +18,7 @@ Our structure looks like this and most classes make use of listeners rather than
 ### Streams and listeners, observer pattern, state? pattern
 Our homepage listens to state changes in connection and changes what is displayed for example connection status:
 ![alt text](image-2.png)
+
 By listening to connection states in enums, defined in the mds_flutter package.
 
 Our SleepSessionModel also subscribes to streams and reacts on data received.
@@ -34,6 +35,7 @@ This removes the need to always having passing the same instance of the device t
 The app uses Sembast for data storage. At the moment the database do not make any dumps, instead they have to be accessed through device explorer in android studios -> data -> data -> com.example.mobile_health ... -> SleepData.db
 
 In order to make the data readable by pandas in python, you have to enclose the entire data structure in "[]" and rename .db to .json and separate all sleepsessions with "," as shown:
+
 ![alt text](image-4.png)
 ![alt text](image-5.png)
 
