@@ -51,7 +51,6 @@ class ConnectionsScreen extends StatelessWidget {
 
                 // Create loading VM with SAME device + SAME broadcast stream
                 final loadingModel = LoadingscreenViewmodel(
-                  device: dev,
                   statusEvents: statusStream,
                 );
 
