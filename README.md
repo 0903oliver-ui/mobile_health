@@ -61,7 +61,11 @@ A small attempt was made to determine the reliability of the data collected from
 
 This data was collected from session 13 from Databasetest.json, extracted from the phone and analysed in the included jupyter notebook.
 
-It can be seen that the device with this particular person, has a standard deviation of 8 BPM in heart rate and 151 ms in r-r interval if we assume resting constant heart rate but not for r-r interval(r-r interval should probably not have assumptions of being constant as HR can have the same mean, but very diffrent HRVs and implies non constant r-r intervals as the norm). This may affect sleep scoring by polluting with this noise or inaccurate readings.
+It can be seen that the device with this particular person during this session, has a standard deviation of 8 BPM in heart rate and 151 ms in r-r interval if we assume resting constant heart rate but not for r-r interval(r-r interval should probably not have assumptions of being constant as HR can have the same mean, but very diffrent HRVs and implies non constant r-r intervals as the norm). This may affect sleep scoring by polluting with this noise or inaccurate readings, althoug we have not determined wether this noise is significant.
+
+![alt text](image-10.png)
+
+In this session we also found that heart rate did not follow a normal distribution, while r-r was.
 
 
 # Sensor interface
