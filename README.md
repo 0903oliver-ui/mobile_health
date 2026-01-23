@@ -9,7 +9,7 @@ The app uses sembast to store data.
 # Usage
 An older version of the app and how to connect.
 
-<video controls src="screen-20260116-143536.mp4" title="Title"></video>
+![alt text](ezgif-7226026cf49a4cf1.gif)
 
 As we dont have a video of our latest version we cant show how to start orstop, however with the version we have made now, when connected, you may start recording your sleep session. Once done, press the stop button and your sleepscore will be displayed.
 
