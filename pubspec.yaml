@@ -42,7 +42,7 @@ dependencies:
   permission_handler: ^12.0.1
   provider: ^6.1.2
   light: ^4.1.0
-  movesense_plus: ^1.0.0
+  movesense_plus: ^1.2.1
   get: ^4.7.3
   sembast: ^3.8.6
   path_provider: ^2.1.5
